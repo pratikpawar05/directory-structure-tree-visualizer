@@ -22,14 +22,21 @@ function directoryStructure(dirPath) {
   // console.log(parentChilds);
   return parentChilds;
 }
-let pathName="./raw";
-let structure={}
+//input from user to render the directory tree
+let pathName;
+let input = process.argv.slice(2);
+if (input == undefined) {
+  pathName = "./";
+} else {
+  pathName = input[0];
+}
+let structure = {};
 structure[`${path.basename(pathName)}`] = directoryStructure(pathName);
 
 // specify a name property at root level to display root
 tree.setData({
   extended: true,
-  children: structure
+  children: structure,
 });
 screen.append(tree);
 //allow control the table with the keyboard
